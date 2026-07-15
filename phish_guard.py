@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-EMAIL = os.environ.get("EMAIL", "richardovensehi@gmail.com")
+EMAIL = os.environ.get("EMAIL", "your_email_address")
 GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD", "") 
 CHECK_INTERVAL = 5 
 
