@@ -61,21 +61,15 @@ npm install
 
 ## Running the Application
 
-To run the full Griffin SOC environment locally, you will need to open **three separate terminal windows**:
+To run the full Griffin SOC environment locally, you will need to open **two separate terminal windows**:
 
-**Terminal 1: Start the Dashboard API Server**
+**Terminal 1: Start the Backend (API Server & Detection Engine)**
 ```bash
 python dashboard.py
 ```
-*(This starts the Flask REST API and creates the local SQLite database).*
+*(This starts the Flask REST API and automatically spawns the `phish_guard.py` detection engine in the background).*
 
-**Terminal 2: Start the Detection Engine**
-```bash
-python phish_guard.py
-```
-*(This starts the AI monitoring loop. The first run will download the HuggingFace model).*
-
-**Terminal 3: Start the React Frontend**
+**Terminal 2: Start the React Frontend**
 ```bash
 cd Griffin-Shield
 npm run dev
