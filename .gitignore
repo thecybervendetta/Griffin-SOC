@@ -1,0 +1,48 @@
+# Environment Variables (CRITICAL: Do not push API keys or passwords!)
+.env
+.env.local
+
+# Python Environments
+venv/
+env/
+.venv/
+
+# Python Cache & Build
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+eggs/
+.eggs/
+lib/
+lib64/
+*.egg-info/
+*.egg
+
+# Databases
+instance/
+*.sqlite
+*.sqlite3
+*.db
+
+# Logs
+*.log
+phish_guard.log
+
+# Node & Frontend (React/Vite)
+node_modules/
+dist/
+dist-ssr/
+.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS & IDEs
+.DS_Store
+.vscode/
+.idea/
+*.swp
