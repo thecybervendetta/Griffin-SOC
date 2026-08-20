@@ -1,11 +1,13 @@
-# Griffin SOC:
+# Griffin SOC (PhishGuard): AI-Automated Phishing Gateway
 
 **Project:** Custom Security Operations Center (SOC) Tooling  
 **Role:** DevSecOps Engineer / SOC Developer  
 **Technologies:** React, Python, Artificial Intelligence (NLP), HuggingFace BERT, VirusTotal API, SQLite, Docker, IMAP Protocols, SOAR  
 
 ## 📌 1. Executive Summary
-The Griffin SOC (also known as PhishGuard) platform represents a major advancement in local defensive architecture. This project involved architecting an event-driven, AI-automated phishing email gateway capable of actively monitoring inboxes, defanging malicious indicators of compromise (IOCs), and triaging threats using Natural Language Processing (NLP). By removing external webhook notification dependencies and utilizing localized, stateful microservices, the platform achieves robust protection with minimal latency, paired with a React frontend (Griffin-Shield) for real-time monitoring and forensic triage.
+The Griffin SOC platform represents a major advancement in local defensive architecture. This project involved architecting an event-driven, AI-automated phishing email gateway capable of actively monitoring inboxes, defanging malicious indicators of compromise (IOCs), and triaging threats using Natural Language Processing (NLP). By removing external webhook notification dependencies and utilizing localized, stateful microservices, the platform achieves robust protection with minimal latency, paired with a React frontend (Griffin-Shield) for real-time monitoring and forensic triage.
+
+![Griffin Overview](./griffin-images/image1.png)
 
 ---
 
@@ -29,6 +31,8 @@ PROCESSED_UIDS &= active_uids
 ```
 This intersection ensures that once a user manually marks a message as read elsewhere, its UID is automatically pruned from memory, preventing memory leaks while keeping inbox alerts perfectly synced.
 
+![IMAP State Management](./griffin-images/image2.png)
+
 ---
 
 ## ⚔️ 3. Threat Modeling & Defensive Mechanics
@@ -47,6 +51,8 @@ defanged_url = safe_url.replace(".", "[.]").replace("://", "[://]").replace("htt
 ```
 This forces all extracted targets into static text fields, satisfying defensive triage requirements while maintaining technical readability.
 
+![Defanging Logic](./griffin-images/image3.png)
+
 ---
 
 ## 💻 4. Analytical Functionality & Administrative Controls
@@ -57,6 +63,9 @@ The React frontend (**Griffin-Shield**) is optimized for real-time monitoring, p
 *   **Progressive Threat Gauges:** Incident cards render visual metrics tracking VirusTotal detection rates, dynamically highlighting high-risk attachments based on the proportion of vendor flags.
 *   **Data Export (CSV):** Allows instant compiler extraction of logged incidents from SQLite. This feature exports the dataset as a structured CSV for offline compliance logging or threat intelligence sharing.
 *   **Purge Controls (Clear History):** Wipes active logs from the SQLite database and resets the analyst's dashboard array, ensuring seamless operational transitions between shift rotations.
+
+![Griffin Dashboard Metrics](./griffin-images/image4.png)
+![Threat Gauges](./griffin-images/image5.png)
 
 ---
 
@@ -108,6 +117,9 @@ Once ingested by the SIEM/SOAR engine, automated remediation playbooks are execu
 *   **Malicious Attachment Match:** The SHA-256 hash is pushed to active corporate EDR agents (e.g., CrowdStrike Falcon, Microsoft Defender for Endpoint) to quarantine matching files across all endpoints.
 *   **Domain Reputation Mitigation:** The defanged URL is pushed directly to the enterprise secure DNS web gateways (e.g., Cisco Umbrella) to immediately block domain resolution across the corporate network.
 
+![SOAR Playbook Execution](./griffin-images/image6.png)
+![Microservices Architecture](./griffin-images/image7.png)
+
 ---
 
 ## 🛡️ 6. Conclusions and Enterprise Hardening Recommendations
@@ -118,11 +130,6 @@ The Griffin SOC platform represents a major advancement in automated defensive a
 2.  **Containerization and Sandboxing:** Bundle the API backend, background worker, and React build target into isolated, rootless Docker containers running on a restricted private virtual network.
 3.  **Encrypted Local Sessions:** Upgrade local session tracking in the React client, transitioning from unencrypted `localStorage` states to cryptographically signed JWT tokens or secure session cookies.
 
-
-
-# Griffin SOC (Security Operations Center)
-
-Griffin SOC is a localized, AI-powered phishing detection and incident response platform. It monitors a target email inbox in real-time, uses Machine Learning to analyze text, queries VirusTotal for malicious attachments, automatically quarantines dangerous emails, and streams the intelligence to a live React dashboard for security analysts.
 
 ## Key Features
 - **AI Text Classification**: Uses a local Hugging Face Transformer model (`Auguzcht/securisense-phishing-detection`) to classify email bodies as Phishing or Safe.
